@@ -12,12 +12,13 @@ function App() {
   const [searchFilter, setSearchFilter] = useState("");
   const [cart, setCart] = useState([]);
   const [amount, setAmount] = useState("");
-  const [sortedList, setSortedList] = useState([]);
+  const [sortedList, setSortedList] = useState([...productList]);
+  const [startList, setStartList] = useState([...productList]);
 //
 
   useEffect(() => {
     setSortedList(
-      productList.filter((product) => {
+      startList.filter((product) => {
         if (minFilter.length === 0 && maxFilter.length === 0) {
           return product;
         } else if (
@@ -28,13 +29,15 @@ function App() {
         } else if (product.price <= maxFilter && product.price >= minFilter) {
           return product;
         }
+      }).filter((product) => {
+         return searchFilter ? product.name.toLowerCase().includes(searchFilter.toLowerCase()) : product
       })
     );
-  }, [minFilter, maxFilter]);
-
-  useEffect(() => {
+  }, [minFilter, maxFilter, searchFilter]);
+  console.log(startList)
+  // useEffect(() => {
     
-  }, [searchFilter])
+  // }, [searchFilter])
   return (
     <AppBox>
       <GlobalStyles />
@@ -47,6 +50,8 @@ function App() {
         setSearchFilter={setSearchFilter}
       />
       <Home
+        startList={startList}
+        setStartList={setStartList}
         productList={sortedList}
         amount={amount}
         setAmount={setAmount}

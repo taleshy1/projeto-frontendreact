@@ -9,12 +9,15 @@ export default function Home({
   cart,
   setCart,
   sortedList,
-  setSortedList
+  setSortedList,
+  startList,
+  setStartList
 }) {
   const [ordination, setOrdination] = useState("null");
   let productQuantity = 0;
 
   const addItensOnCart = (receivedProduct) => {
+    console.log(cart.length)
     if (cart.length === 0) {
       setCart([...cart, { ...receivedProduct, quantity: 1 }]);
       setAmount(Number(amount) + Number(receivedProduct.price));
@@ -64,10 +67,34 @@ export default function Home({
         return 0
       }
       return 0
-    })
+    }
+    )
+    startList.sort((a,b) => {
+      if(ordination === "Decrescente"){
+
+        if(a.name < b.name){
+          return -1;
+        }
+        if(a.name > b.name){
+          return 1
+        }
+        return 0
+      }else if(ordination === "Crescente"){
+        if(a.name > b.name){
+          return -1;
+        }
+        if(a.name < b.name){
+          return 1
+        }
+        return 0
+      }
+      return 0
+    }
+    )
+    
+    setStartList(startList)
     setSortedList([...sortedList])
   }, [ordination])
-
 
   return (
     <HomeBoxStyled>
@@ -79,7 +106,7 @@ export default function Home({
             value={ordination}
             onChange={(e)=>setOrdination(e.target.value)}
           >
-            <option value="null" disabled></option>
+            <option value="">Ordenar</option>
             <option value="Crescente">Crescente</option>
             <option value="Decrescente">Decrescente</option>
           </select>
@@ -90,3 +117,26 @@ export default function Home({
   )
 }
 
+
+// .sort((a,b) => {
+  //     if(ordination === "Decrescente"){
+
+  //       if(a.name < b.name){
+  //         return -1;
+  //       }
+  //       if(a.name > b.name){
+  //         return 1
+  //       }
+  //       return 0
+  //     }else if(ordination === "Crescente"){
+  //       if(a.name > b.name){
+  //         return -1;
+  //       }
+  //       if(a.name < b.name){
+  //         return 1
+  //       }
+  //       return 0
+  //     }
+  //     return 0
+  //   }
+  //   )
