@@ -17,10 +17,10 @@ export default function Cart({ amount, setAmount, cart, setCart }) {
         setCart(newCart)
       }
     }) 
+    
   }
 
   const renderItensOnCart = cart.map((item) => {
-    console.log(item)
     return (
       <Itens
         itemName={item.name}
@@ -34,7 +34,6 @@ export default function Cart({ amount, setAmount, cart, setCart }) {
   });
 
   
-  // console.log(cart)
   return (
     <CartBoxStyled>
       <h2>Carrinho</h2>
