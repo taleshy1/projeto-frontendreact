@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Itens ( {itemName,itemPrice,itemQuantity, removeItemFromCart, itemId}) {
     return (
-        <p>{itemName} R${itemPrice.toFixed(2)} Quantidade: {itemQuantity}<button onClick={()=>removeItemFromCart(itemId)}>remover</button></p>
+        <p>{itemName} R${Number(itemPrice).toFixed(2)} Quantidade: {itemQuantity}<button onClick={()=>removeItemFromCart(itemId)}>remover</button></p>
        
     )
 }

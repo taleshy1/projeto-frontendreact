@@ -34,10 +34,6 @@ function App() {
       })
     );
   }, [minFilter, maxFilter, searchFilter]);
-  console.log(startList)
-  // useEffect(() => {
-    
-  // }, [searchFilter])
   return (
     <AppBox>
       <GlobalStyles />

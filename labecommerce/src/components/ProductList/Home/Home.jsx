@@ -17,28 +17,25 @@ export default function Home({
   let productQuantity = 0;
 
   const addItensOnCart = (receivedProduct) => {
-    console.log(cart.length)
-    if (cart.length === 0) {
-      setCart([...cart, { ...receivedProduct, quantity: 1 }]);
-      setAmount(Number(amount) + Number(receivedProduct.price));
+    const newProduct = cart.find((item) => item.id === receivedProduct.id)
+    if (newProduct === undefined) {
+      receivedProduct = {...receivedProduct, quantity: 1}
+      setCart([...cart, receivedProduct]);
+      setAmount(Number(amount) + Number(receivedProduct.price))
     } else {
-      cart.map((myProduct) => {
-        if (myProduct.id === receivedProduct.id) {
-          myProduct.quantity = Number(myProduct.quantity) + 1;
-          setCart([...cart]);
-          setAmount(Number(amount) + Number(receivedProduct.price));
-        } else if (
-          !cart.some((item) => {
-            return Object.values(item).includes(receivedProduct.id);
-          })
-        ) {
-          setCart([...cart, { ...receivedProduct, quantity: 1 }]);
-          setAmount(Number(amount) + Number(receivedProduct.price));
+      const newCart = cart.map((item) => {
+        if(item.id === receivedProduct.id){
+          setAmount(Number(amount) + Number(receivedProduct.price))
+          return {...newProduct, quantity: newProduct.quantity+1}
+        }else {
+          return item
         }
-      });
+      })
+      setCart(newCart)
     }
-    receivedProduct = "";
+
   };
+  console.log(cart)
 
   const renderProducts = productList.map((product) => {
     productQuantity++;
@@ -140,3 +137,7 @@ export default function Home({
   //     return 0
   //   }
   //   )
+
+  // cart.map((product) => {
+  //   if (product.includes(receivedProduct.id)) { return true; }
+  // }

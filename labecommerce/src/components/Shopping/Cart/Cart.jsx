@@ -3,6 +3,7 @@ import Itens from "../Items/Itens";
 import { CartBoxStyled } from "./CartStyle";
 
 export default function Cart({ amount, setAmount, cart, setCart }) {
+ 
   const removeItemFromCart = (id) => {
     cart.map((myProduct) => {
       if (myProduct.id === id && myProduct.quantity >= 1){
@@ -19,6 +20,7 @@ export default function Cart({ amount, setAmount, cart, setCart }) {
   }
 
   const renderItensOnCart = cart.map((item) => {
+    console.log(item)
     return (
       <Itens
         itemName={item.name}

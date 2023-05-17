@@ -5,7 +5,7 @@ export default function Filters({ minFilter, setMinFilter, maxFilter, setMaxFilt
 
     const conditionSetMinFilter = (e) => {
         const value = parseInt(e.target.value);
-        if (value <= 0){
+        if (value < 0){
             alert("Valor mínimo para o filtro é 0")
             setMinFilter("")
 
@@ -16,7 +16,7 @@ export default function Filters({ minFilter, setMinFilter, maxFilter, setMaxFilt
     }
     const conditionSetMaxFilter = (e) => {
         const value = parseInt(e.target.value);
-        if (value <= 0){
+        if (value < 0){
             alert("Valor mínimo para o filtro é 0")
             setMaxFilter("")
         } else {
