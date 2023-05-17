@@ -15,6 +15,6 @@ export const HomeLabelBox = styled.div`
 export const HomeCardsBox = styled.div`
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
 
 `

@@ -9,33 +9,33 @@ export default function Home({
   cart,
   setCart,
   sortedList,
-  setSortedList
+  setSortedList,
+  startList,
+  setStartList
 }) {
   const [ordination, setOrdination] = useState("null");
   let productQuantity = 0;
 
   const addItensOnCart = (receivedProduct) => {
-    if (cart.length === 0) {
-      setCart([...cart, { ...receivedProduct, quantity: 1 }]);
-      setAmount(Number(amount) + Number(receivedProduct.price));
+    const newProduct = cart.find((item) => item.id === receivedProduct.id)
+    if (newProduct === undefined) {
+      receivedProduct = {...receivedProduct, quantity: 1}
+      setCart([...cart, receivedProduct]);
+      setAmount(Number(amount) + Number(receivedProduct.price))
     } else {
-      cart.map((myProduct) => {
-        if (myProduct.id === receivedProduct.id) {
-          myProduct.quantity = Number(myProduct.quantity) + 1;
-          setCart([...cart]);
-          setAmount(Number(amount) + Number(receivedProduct.price));
-        } else if (
-          !cart.some((item) => {
-            return Object.values(item).includes(receivedProduct.id);
-          })
-        ) {
-          setCart([...cart, { ...receivedProduct, quantity: 1 }]);
-          setAmount(Number(amount) + Number(receivedProduct.price));
+      const newCart = cart.map((item) => {
+        if(item.id === receivedProduct.id){
+          setAmount(Number(amount) + Number(receivedProduct.price))
+          return {...newProduct, quantity: newProduct.quantity+1}
+        }else {
+          return item
         }
-      });
+      })
+      setCart(newCart)
     }
-    receivedProduct = "";
+
   };
+  console.log(cart)
 
   const renderProducts = productList.map((product) => {
     productQuantity++;
@@ -64,10 +64,34 @@ export default function Home({
         return 0
       }
       return 0
-    })
+    }
+    )
+    startList.sort((a,b) => {
+      if(ordination === "Decrescente"){
+
+        if(a.name < b.name){
+          return -1;
+        }
+        if(a.name > b.name){
+          return 1
+        }
+        return 0
+      }else if(ordination === "Crescente"){
+        if(a.name > b.name){
+          return -1;
+        }
+        if(a.name < b.name){
+          return 1
+        }
+        return 0
+      }
+      return 0
+    }
+    )
+    
+    setStartList(startList)
     setSortedList([...sortedList])
   }, [ordination])
-
 
   return (
     <HomeBoxStyled>
@@ -79,7 +103,7 @@ export default function Home({
             value={ordination}
             onChange={(e)=>setOrdination(e.target.value)}
           >
-            <option value="null" disabled></option>
+            <option value="">Ordenar</option>
             <option value="Crescente">Crescente</option>
             <option value="Decrescente">Decrescente</option>
           </select>
@@ -90,3 +114,30 @@ export default function Home({
   )
 }
 
+
+// .sort((a,b) => {
+  //     if(ordination === "Decrescente"){
+
+  //       if(a.name < b.name){
+  //         return -1;
+  //       }
+  //       if(a.name > b.name){
+  //         return 1
+  //       }
+  //       return 0
+  //     }else if(ordination === "Crescente"){
+  //       if(a.name > b.name){
+  //         return -1;
+  //       }
+  //       if(a.name < b.name){
+  //         return 1
+  //       }
+  //       return 0
+  //     }
+  //     return 0
+  //   }
+  //   )
+
+  // cart.map((product) => {
+  //   if (product.includes(receivedProduct.id)) { return true; }
+  // }

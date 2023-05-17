@@ -12,7 +12,7 @@ export default function ProductCard ({product,addItensOnCart }) {
             <ProductInfoBox>
                 <p>{product.name}</p>
                 <p>Preço: R${product.price}</p>
-                <Button onClick={()=> addItensOnCart(product)}>Adicionar ao carrinho</Button>
+                <Button onClick={() => addItensOnCart(product)}>Adicionar ao carrinho</Button>
             </ProductInfoBox>
         </CardBox>
     )
