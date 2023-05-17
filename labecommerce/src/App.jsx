@@ -14,7 +14,29 @@ function App() {
   const [amount, setAmount] = useState("");
   const [sortedList, setSortedList] = useState([...productList]);
   const [startList, setStartList] = useState([...productList]);
+  // const []
 //
+useEffect(() => {
+  //get useState
+  const newCart = localStorage.getItem("cart");
+  if(newCart){
+  const CartArray = JSON.parse(newCart)
+  const newAmount = localStorage.getItem("amount")
+  const amountNumber = parseInt(newAmount)
+  setCart([...CartArray])
+  setAmount(amountNumber)}
+},[])
+
+useEffect(() => {
+  setTimeout(() => {
+    const cartString = JSON.stringify(cart)
+    const amountString = JSON.stringify(amount)
+    localStorage.setItem("amount", amountString)
+    localStorage.setItem("cart", cartString)
+ }, 10);
+}, [cart])
+console.log(window, typeof window)
+
 
   useEffect(() => {
     setSortedList(

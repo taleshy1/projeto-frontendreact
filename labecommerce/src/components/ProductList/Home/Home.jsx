@@ -33,9 +33,7 @@ export default function Home({
       })
       setCart(newCart)
     }
-
   };
-  console.log(cart)
 
   const renderProducts = productList.map((product) => {
     productQuantity++;
