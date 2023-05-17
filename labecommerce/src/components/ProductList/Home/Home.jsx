@@ -87,6 +87,6 @@ export default function Home({
       </HomeLabelBox>
       <HomeCardsBox>{renderProducts}</HomeCardsBox>
     </HomeBoxStyled>
-  );
+  )
 }
 
