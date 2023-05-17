@@ -13,7 +13,7 @@ function App() {
   const [cart, setCart] = useState([]);
   const [amount, setAmount] = useState("");
   const [sortedList, setSortedList] = useState([]);
-
+//
 
   useEffect(() => {
     setSortedList(
@@ -30,7 +30,6 @@ function App() {
         }
       })
     );
-    // setSortedList(productListFiltered)
   }, [minFilter, maxFilter]);
 
   useEffect(() => {

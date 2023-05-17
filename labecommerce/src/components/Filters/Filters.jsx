@@ -23,7 +23,6 @@ export default function Filters({ minFilter, setMinFilter, maxFilter, setMaxFilt
             setMaxFilter(e.target.value)
         }
     }
-// filter()
 
     return (
         <FilterBoxStyle>

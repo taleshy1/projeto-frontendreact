@@ -1,6 +1,6 @@
 import React from "react";
 import { BoxImage, Button, CardBox, ProductImage, ProductInfoBox } from "./ProductCardStyle";
-
+//
 
 export default function ProductCard ({product,addItensOnCart }) {
 
