@@ -16,6 +16,5 @@ export const HomeCardsBox = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    /* gap: 1%; */
-    /* margin: 1%; */
+
 `
