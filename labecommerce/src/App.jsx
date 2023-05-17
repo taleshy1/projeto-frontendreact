@@ -23,18 +23,21 @@ useEffect(() => {
   const CartArray = JSON.parse(newCart)
   const newAmount = localStorage.getItem("amount")
   const amountNumber = parseInt(newAmount)
+  setAmount(amountNumber)
   setCart([...CartArray])
-  setAmount(amountNumber)}
+}
 },[])
-
 useEffect(() => {
   setTimeout(() => {
     const cartString = JSON.stringify(cart)
     const amountString = JSON.stringify(amount)
+    if(amountString === "") {
+      setAmount(0)
+    }
     localStorage.setItem("amount", amountString)
     localStorage.setItem("cart", cartString)
  }, 10);
-}, [cart])
+}, [cart,amount])
 console.log(window, typeof window)
 
 

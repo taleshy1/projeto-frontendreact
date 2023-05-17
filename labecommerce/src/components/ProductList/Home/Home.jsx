@@ -33,6 +33,7 @@ export default function Home({
       })
       setCart(newCart)
     }
+    
   };
 
   const renderProducts = productList.map((product) => {
@@ -105,6 +106,9 @@ export default function Home({
             <option value="Crescente">Crescente</option>
             <option value="Decrescente">Decrescente</option>
           </select>
+          {/* <button onClick={()=> {
+            localStorage.clear()
+          }}>APAGAR USESTORAGE</button> */}
         </label>
       </HomeLabelBox>
       <HomeCardsBox>{renderProducts}</HomeCardsBox>
