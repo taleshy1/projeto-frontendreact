@@ -116,30 +116,3 @@ export default function Home({
   )
 }
 
-
-// .sort((a,b) => {
-  //     if(ordination === "Decrescente"){
-
-  //       if(a.name < b.name){
-  //         return -1;
-  //       }
-  //       if(a.name > b.name){
-  //         return 1
-  //       }
-  //       return 0
-  //     }else if(ordination === "Crescente"){
-  //       if(a.name > b.name){
-  //         return -1;
-  //       }
-  //       if(a.name < b.name){
-  //         return 1
-  //       }
-  //       return 0
-  //     }
-  //     return 0
-  //   }
-  //   )
-
-  // cart.map((product) => {
-  //   if (product.includes(receivedProduct.id)) { return true; }
-  // }

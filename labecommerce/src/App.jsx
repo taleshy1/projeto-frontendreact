@@ -3,8 +3,9 @@ import Filters from "./components/Filters/Filters";
 import Home from "./components/ProductList/Home/Home";
 import Cart from "./components/Shopping/Cart/Cart";
 import GlobalStyles from "./GlobalStyle";
-import { AppBox } from "./AppStyle";
+import { AppBox, Content, FadeIn, FadeOut, } from "./AppStyle";
 import { productList } from "./assets/productList";
+import LoadingPage from "./components/Loading";
 
 function App() {
   const [minFilter, setMinFilter] = useState("");
@@ -14,7 +15,8 @@ function App() {
   const [amount, setAmount] = useState("");
   const [sortedList, setSortedList] = useState([...productList]);
   const [startList, setStartList] = useState([...productList]);
-  // const []
+  const [loading, setLoading] = useState(true)
+  const [showContent, setShowContent] = useState(false)
 //
 useEffect(() => {
   //get useState
@@ -25,8 +27,15 @@ useEffect(() => {
   const amountNumber = parseInt(newAmount)
   setAmount(amountNumber)
   setCart([...CartArray])
+
+  setTimeout(() => {
+    setLoading(false)
+    setShowContent(true)
+  }, 3000);
 }
 },[])
+
+
 useEffect(() => {
   setTimeout(() => {
     const cartString = JSON.stringify(cart)
@@ -37,8 +46,8 @@ useEffect(() => {
     localStorage.setItem("amount", amountString)
     localStorage.setItem("cart", cartString)
  }, 10);
+ 
 }, [cart,amount])
-console.log(window, typeof window)
 
 
   useEffect(() => {
@@ -58,10 +67,16 @@ console.log(window, typeof window)
          return searchFilter ? product.name.toLowerCase().includes(searchFilter.toLowerCase()) : product
       })
     );
+
   }, [minFilter, maxFilter, searchFilter]);
+
+
   return (
-    <AppBox>
+     <>
       <GlobalStyles />
+      {loading ? <LoadingPage /> : (
+      <Content showContent = {showContent}>
+      <AppBox> 
       <Filters
         minFilter={minFilter}
         setMinFilter={setMinFilter}
@@ -87,7 +102,10 @@ console.log(window, typeof window)
         cart={cart}
         setCart={setCart}
       />
-    </AppBox>
+      </AppBox>
+      </Content>
+      )} 
+    </>
   );
 }
 

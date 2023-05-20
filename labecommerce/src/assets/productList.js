@@ -18,11 +18,4 @@ export const productList = [
         price: 123,
         imageUrl: "https://picsum.photos/200/300?random",
     },
-    {
-        id: 4,
-        name: "sinm",
-        price: 123,
-        imageUrl: "https://picsum.photos/200/300?random",
-    },
-    
 ]
