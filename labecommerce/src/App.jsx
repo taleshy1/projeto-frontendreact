@@ -21,8 +21,12 @@ function App() {
 
   useEffect(() => {
     //get useState
-    setCart(JSON.parse(localStorage.getItem("cart")))
-    setAmount(JSON.parse(localStorage.getItem("amount")))
+   if (localStorage.getItem("cart")) {
+      setCart(JSON.parse(localStorage.getItem("cart")))
+      setAmount(JSON.parse(localStorage.getItem("amount")))
+    } else {
+      setCart([])
+    }
 
     setTimeout(() => {
       setLoading(false);
