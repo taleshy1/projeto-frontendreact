@@ -13,51 +13,51 @@ export default function Home({
   startList,
   setStartList
 }) {
-  const [ordination, setOrdination] = useState("null");
+  const [ordination, setOrdination] = useState("");
   let productQuantity = 0;
 
   const addItensOnCart = (receivedProduct) => {
     const newProduct = cart.find((item) => item.id === receivedProduct.id)
     if (newProduct === undefined) {
-      receivedProduct = {...receivedProduct, quantity: 1}
+      receivedProduct = { ...receivedProduct, quantity: 1 }
       setCart([...cart, receivedProduct]);
       setAmount(Number(amount) + Number(receivedProduct.price))
     } else {
       const newCart = cart.map((item) => {
-        if(item.id === receivedProduct.id){
+        if (item.id === receivedProduct.id) {
           setAmount(Number(amount) + Number(receivedProduct.price))
-          return {...newProduct, quantity: newProduct.quantity+1}
-        }else {
+          return { ...newProduct, quantity: newProduct.quantity + 1 }
+        } else {
           return item
         }
       })
       setCart(newCart)
     }
-    
+
   };
 
   const renderProducts = productList.map((product) => {
     productQuantity++;
 
-    return <ProductCard product={product} addItensOnCart={addItensOnCart} key={product.id}/>;
+    return <ProductCard product={product} addItensOnCart={addItensOnCart} key={product.id} />;
   });
 
   useEffect(() => {
-    sortedList.sort((a,b) => {
-      if(ordination === "Decrescente"){
+    sortedList.sort((a, b) => {
+      if (ordination === "Decrescente") {
 
-        if(a.name < b.name){
+        if (a.name < b.name) {
           return -1;
         }
-        if(a.name > b.name){
+        if (a.name > b.name) {
           return 1
         }
         return 0
-      }else if(ordination === "Crescente"){
-        if(a.name > b.name){
+      } else if (ordination === "Crescente") {
+        if (a.name > b.name) {
           return -1;
         }
-        if(a.name < b.name){
+        if (a.name < b.name) {
           return 1
         }
         return 0
@@ -65,21 +65,21 @@ export default function Home({
       return 0
     }
     )
-    startList.sort((a,b) => {
-      if(ordination === "Decrescente"){
+    startList.sort((a, b) => {
+      if (ordination === "Decrescente") {
 
-        if(a.name < b.name){
+        if (a.name < b.name) {
           return -1;
         }
-        if(a.name > b.name){
+        if (a.name > b.name) {
           return 1
         }
         return 0
-      }else if(ordination === "Crescente"){
-        if(a.name > b.name){
+      } else if (ordination === "Crescente") {
+        if (a.name > b.name) {
           return -1;
         }
-        if(a.name < b.name){
+        if (a.name < b.name) {
           return 1
         }
         return 0
@@ -87,7 +87,7 @@ export default function Home({
       return 0
     }
     )
-    
+
     setStartList(startList)
     setSortedList([...sortedList])
   }, [ordination])
@@ -100,7 +100,7 @@ export default function Home({
           Ordenação:
           <select
             value={ordination}
-            onChange={(e)=>setOrdination(e.target.value)}
+            onChange={(e) => setOrdination(e.target.value)}
           >
             <option value="">Ordenar</option>
             <option value="Crescente">Crescente</option>

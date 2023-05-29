@@ -3,8 +3,9 @@ import Filters from "./components/Filters/Filters";
 import Home from "./components/ProductList/Home/Home";
 import Cart from "./components/Shopping/Cart/Cart";
 import GlobalStyles from "./GlobalStyle";
-import { AppBox } from "./AppStyle";
+import { AppBox, Content, Titulo } from "./AppStyle";
 import { productList } from "./assets/productList";
+import LoadingPage from "./components/Loading";
 
 function App() {
   const [minFilter, setMinFilter] = useState("");
@@ -14,31 +15,28 @@ function App() {
   const [amount, setAmount] = useState("");
   const [sortedList, setSortedList] = useState([...productList]);
   const [startList, setStartList] = useState([...productList]);
-  // const []
-//
-useEffect(() => {
-  //get useState
-  const newCart = localStorage.getItem("cart");
-  if(newCart){
-  const CartArray = JSON.parse(newCart)
-  const newAmount = localStorage.getItem("amount")
-  const amountNumber = parseInt(newAmount)
-  setAmount(amountNumber)
-  setCart([...CartArray])
-}
-},[])
-useEffect(() => {
-  setTimeout(() => {
-    const cartString = JSON.stringify(cart)
-    const amountString = JSON.stringify(amount)
-    if(amountString === "") {
-      setAmount(0)
-    }
-    localStorage.setItem("amount", amountString)
-    localStorage.setItem("cart", cartString)
- }, 10);
-}, [cart,amount])
-console.log(window, typeof window)
+  const [loading, setLoading] = useState(true)
+  const [showContent, setShowContent] = useState(false)
+
+
+  useEffect(() => {
+    //get useState
+    setCart(JSON.parse(localStorage.getItem("cart")))
+    setAmount(JSON.parse(localStorage.getItem("amount")))
+
+    setTimeout(() => {
+      setLoading(false);
+      setShowContent(true)
+    }, 3000)
+
+  }, [])
+  useEffect(() => {
+    setTimeout(() => {
+
+      localStorage.setItem("amount", JSON.stringify(amount))
+      localStorage.setItem("cart", JSON.stringify(cart))
+    }, 10);
+  }, [cart, amount])
 
 
   useEffect(() => {
@@ -55,39 +53,49 @@ console.log(window, typeof window)
           return product;
         }
       }).filter((product) => {
-         return searchFilter ? product.name.toLowerCase().includes(searchFilter.toLowerCase()) : product
+        return searchFilter ? product.name.toLowerCase().includes(searchFilter.toLowerCase()) : product
       })
     );
   }, [minFilter, maxFilter, searchFilter]);
   return (
-    <AppBox>
+    <>
       <GlobalStyles />
-      <Filters
-        minFilter={minFilter}
-        setMinFilter={setMinFilter}
-        maxFilter={maxFilter}
-        setMaxFilter={setMaxFilter}
-        searchFilter={searchFilter}
-        setSearchFilter={setSearchFilter}
-      />
-      <Home
-        startList={startList}
-        setStartList={setStartList}
-        productList={sortedList}
-        amount={amount}
-        setAmount={setAmount}
-        cart={cart}
-        setCart={setCart}
-        sortedList={sortedList}
-        setSortedList={setSortedList}
-      />
-      <Cart
-        amount={amount}
-        setAmount={setAmount}
-        cart={cart}
-        setCart={setCart}
-      />
-    </AppBox>
+      {loading ? (
+        <LoadingPage />
+      ) : (
+        <Content showContent={showContent}>
+          <Titulo>VIAGEM ESTELAR</Titulo>
+          <AppBox>
+            <Filters
+              minFilter={minFilter}
+              setMinFilter={setMinFilter}
+              maxFilter={maxFilter}
+              setMaxFilter={setMaxFilter}
+              searchFilter={searchFilter}
+              setSearchFilter={setSearchFilter}
+            />
+            <Home
+              startList={startList}
+              setStartList={setStartList}
+              productList={sortedList}
+              amount={amount}
+              setAmount={setAmount}
+              cart={cart}
+              setCart={setCart}
+              sortedList={sortedList}
+              setSortedList={setSortedList}
+            />
+            <Cart
+              amount={amount}
+              setAmount={setAmount}
+              cart={cart}
+              setCart={setCart}
+            />
+          </AppBox>
+        </Content>
+      )}
+
+    </>
   );
 }
 

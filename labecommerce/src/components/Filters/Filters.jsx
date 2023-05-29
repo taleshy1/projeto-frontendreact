@@ -1,11 +1,11 @@
 import React from "react";
-import { FilterBoxStyle } from "./FiltersStyle";
+import { FilterBoxStyle, FilterTittle, InputStyled } from "./FiltersStyle";
 
 export default function Filters({ minFilter, setMinFilter, maxFilter, setMaxFilter, seachFilter, setSearchFilter, }) {
 
     const conditionSetMinFilter = (e) => {
         const value = parseInt(e.target.value);
-        if (value < 0){
+        if (value < 0) {
             alert("Valor mínimo para o filtro é 0")
             setMinFilter("")
 
@@ -16,7 +16,7 @@ export default function Filters({ minFilter, setMinFilter, maxFilter, setMaxFilt
     }
     const conditionSetMaxFilter = (e) => {
         const value = parseInt(e.target.value);
-        if (value < 0){
+        if (value < 0) {
             alert("Valor mínimo para o filtro é 0")
             setMaxFilter("")
         } else {
@@ -25,24 +25,24 @@ export default function Filters({ minFilter, setMinFilter, maxFilter, setMaxFilt
     }
 
     return (
-        <FilterBoxStyle>
-            <h2>Filtros</h2>
+        <FilterBoxStyle >
+            <FilterTittle>Filtros</FilterTittle>
             <label>
                 Valor mínimo:
                 <br />
-                <input value={minFilter} onChange={conditionSetMinFilter} type="number"/>
+                <InputStyled value={minFilter} onChange={conditionSetMinFilter} type="number" />
             </label>
 
             <label>
                 Valor máximo:
                 <br />
-                <input value={maxFilter} onChange={conditionSetMaxFilter} type="number"/>
+                <InputStyled value={maxFilter} onChange={conditionSetMaxFilter} type="number" />
             </label>
 
             <label>
                 Busca por nome:
                 <br />
-                <input value={seachFilter} onChange={(e) => setSearchFilter(e.target.value)} />
+                <InputStyled value={seachFilter} onChange={(e) => setSearchFilter(e.target.value)} />
             </label>
         </FilterBoxStyle>
     )

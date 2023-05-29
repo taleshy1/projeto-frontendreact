@@ -1,9 +1,14 @@
 import { type } from "@testing-library/user-event/dist/type";
 import React from "react";
+import { ItemStyled, Nome } from "./ItensStyle";
 
-export default function Itens ( {itemName,itemPrice,itemQuantity, removeItemFromCart, itemId}) {
+export default function Itens({ itemName, itemPrice, itemQuantity, removeItemFromCart, itemId }) {
     return (
-        <p>{itemName} R${Number(itemPrice).toFixed(2)} Quantidade: {itemQuantity}<button onClick={()=>removeItemFromCart(itemId)}>remover</button></p>
-       
+        <ItemStyled>
+            <Nome>{itemName}</Nome>
+            <p> R${Number(itemPrice).toFixed(2)} </p>
+            <p>
+                Quantidade: {itemQuantity}</p> <button onClick={() => removeItemFromCart(itemId)}>remover</button>
+        </ItemStyled>
     )
 }
